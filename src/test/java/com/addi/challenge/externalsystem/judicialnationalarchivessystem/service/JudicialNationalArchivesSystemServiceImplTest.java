@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,19 +30,21 @@ class JudicialNationalArchivesSystemServiceImplTest {
     private static final String PERSON_NOT_FOUND_EXCEPTION = "Person not found";
 
     @Test
-    public void shouldReturnNotNullListWhenFindAllIsCalled(){
-        Mockito.when(repository.findAll()).thenReturn(createPeopleMockList());
-        List people = this.judicialNationalArchivesSystemService.findAll();
-        assertThat(people).isNotNull();
+    public void shouldReturnANotEmptyListWhenFindAllIsCalledAndThereIsAtLeastOneItemInTheDatabase(){
+        Mockito.when(repository.findAll()).thenReturn(createNotEmptyPeopleMockList());
+        List actualPeople = this.judicialNationalArchivesSystemService.findAll();
+
+        assertThat(actualPeople).isNotNull();
+        assertThat(actualPeople.isEmpty()).isFalse();
     }
 
     @Test
-    public void shouldReturnNotEmptyListWhenFindAllIsCalled(){
-        Mockito.when(repository.findAll()).thenReturn(createPeopleMockList());
-        List people = this.judicialNationalArchivesSystemService.findAll();
+    public void shouldReturnAnEmptyListWhenFindAllIsCalledAndThereIsNoItemInDatabase(){
+        Mockito.when(repository.findAll()).thenReturn(createEmptyPeopleMockList());
+        List actualPeople = this.judicialNationalArchivesSystemService.findAll();
 
-        assertThat(people).isNotNull();
-        assertThat(people.isEmpty()).isFalse();
+        assertThat(actualPeople).isNotNull();
+        assertThat(actualPeople.isEmpty()).isTrue();
     }
 
     @Test
@@ -69,8 +72,12 @@ class JudicialNationalArchivesSystemServiceImplTest {
         assertThat(PERSON_NOT_FOUND_EXCEPTION).isEqualTo(exception.getMessage());
     }
 
-    private List<Person> createPeopleMockList(){
+    private List<Person> createNotEmptyPeopleMockList(){
         return Arrays.asList(createPersonMock(), createPersonMock());
+    }
+
+    private List<Person> createEmptyPeopleMockList(){
+        return Collections.emptyList();
     }
 
     private Person createPersonMock(){
