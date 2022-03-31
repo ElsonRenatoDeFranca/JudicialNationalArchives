@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -96,6 +95,19 @@ class JudicialNationalArchivesSystemServiceImplTest {
 
         assertThat(PERSON_NOT_FOUND_EXCEPTION).isEqualTo(exception.getMessage());
     }
+
+    @Test
+    public void shouldThrowAPersonNotFoundExceptionWhenDeleteByIdIsCalledWithUnknownId(){
+        Person expectedPerson = createPersonMock();
+
+        doThrow(new RuntimeException(PERSON_NOT_FOUND_EXCEPTION)).when(repository).deleteById(anyLong());
+
+        Throwable exception = assertThrows(RuntimeException.class,
+                () -> this.judicialNationalArchivesSystemService.deleteById(expectedPerson.getId()));
+
+        assertThat(PERSON_NOT_FOUND_EXCEPTION).isEqualTo(exception.getMessage());
+    }
+
 
     private List<Person> createNotEmptyPeopleMockList(){
         return Arrays.asList(createPersonMock(), createPersonMock());
