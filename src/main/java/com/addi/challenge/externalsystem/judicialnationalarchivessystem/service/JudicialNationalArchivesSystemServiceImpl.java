@@ -11,14 +11,18 @@ import java.util.List;
 @Service
 public class JudicialNationalArchivesSystemServiceImpl implements JudicialNationalArchivesSystemService{
 
-    @Autowired
-    private JudicialNationalArchivesSystemRepository repository;
+    private final JudicialNationalArchivesSystemRepository repository;
 
     private static final String PERSON_NOT_FOUND_EXCEPTION = "Person not found";
 
+    public JudicialNationalArchivesSystemServiceImpl(JudicialNationalArchivesSystemRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public List<Person> findAll() {
-        return repository.findAll();
+        List<Person> people  = repository.findAll();
+        return people;
     }
 
     @Override
