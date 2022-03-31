@@ -19,14 +19,14 @@ public class JudicialNationalArchiveSystemController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> findAll(){
+    public ResponseEntity<List<Person>> findAll() {
         return new ResponseEntity<>(judicialNationalArchivesSystemService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Person> save(@RequestBody Person person){
-        Person savedPerson  = judicialNationalArchivesSystemService.save(person);
-        
+    public ResponseEntity<Person> save(@RequestBody Person person) {
+        Person savedPerson = judicialNationalArchivesSystemService.save(person);
+
         return new ResponseEntity<>(savedPerson, HttpStatus.CREATED);
     }
 

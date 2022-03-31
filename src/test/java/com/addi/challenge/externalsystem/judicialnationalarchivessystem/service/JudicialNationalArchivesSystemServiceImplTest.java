@@ -30,7 +30,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     private static final String PERSON_NOT_FOUND_EXCEPTION = "Person not found";
 
     @Test
-    public void shouldReturnANotEmptyListWhenFindAllIsCalledAndThereIsAtLeastOneItemInTheDatabase(){
+    public void shouldReturnANotEmptyListWhenFindAllIsCalledAndThereIsAtLeastOneItemInTheDatabase() {
         when(repository.findAll()).thenReturn(createNotEmptyPeopleMockList());
         List<Person> actualPeople = this.judicialNationalArchivesSystemService.findAll();
 
@@ -39,7 +39,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
-    public void shouldReturnAnEmptyListWhenFindAllIsCalledAndThereIsNoItemInDatabase(){
+    public void shouldReturnAnEmptyListWhenFindAllIsCalledAndThereIsNoItemInDatabase() {
         when(repository.findAll()).thenReturn(createEmptyPeopleMockList());
         List<Person> actualPeople = this.judicialNationalArchivesSystemService.findAll();
 
@@ -48,7 +48,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
-    public void shouldReturnNotNullWhenFindByIdIsCalled(){
+    public void shouldReturnNotNullWhenFindByIdIsCalled() {
         Person expectedPerson = createPersonMock();
 
         when(repository.findById(anyLong())).thenReturn(Optional.of(expectedPerson));
@@ -60,7 +60,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
-    public void shouldDeleteAnExistingPersonFromTheDatabaseWhenDeletePersonIsCalled(){
+    public void shouldDeleteAnExistingPersonFromTheDatabaseWhenDeletePersonIsCalled() {
         Person expectedPerson = createPersonMock();
 
         doNothing().when(repository).deleteById(any());
@@ -72,7 +72,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
 
 
     @Test
-    public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled(){
+    public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled() {
         Person expectedPerson = createPersonMock();
 
         when(repository.save(any())).thenReturn(expectedPerson);
@@ -85,7 +85,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
-    public void shouldThrowAPersonNotFoundExceptionWhenFindByIdIsCalledWithUnknownId(){
+    public void shouldThrowAPersonNotFoundExceptionWhenFindByIdIsCalledWithUnknownId() {
         Person expectedPerson = createPersonMock();
 
         when(repository.findById(anyLong())).thenThrow(new RuntimeException(PERSON_NOT_FOUND_EXCEPTION));
@@ -97,7 +97,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
-    public void shouldThrowAPersonNotFoundExceptionWhenDeleteByIdIsCalledWithUnknownId(){
+    public void shouldThrowAPersonNotFoundExceptionWhenDeleteByIdIsCalledWithUnknownId() {
         Person expectedPerson = createPersonMock();
 
         doThrow(new RuntimeException(PERSON_NOT_FOUND_EXCEPTION)).when(repository).deleteById(anyLong());
@@ -109,15 +109,15 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
 
-    private List<Person> createNotEmptyPeopleMockList(){
+    private List<Person> createNotEmptyPeopleMockList() {
         return Arrays.asList(createPersonMock(), createPersonMock());
     }
 
-    private List<Person> createEmptyPeopleMockList(){
+    private List<Person> createEmptyPeopleMockList() {
         return Collections.emptyList();
     }
 
-    private Person createPersonMock(){
+    private Person createPersonMock() {
         return Person.builder()
                 .id(1L)
                 .nationalIdentificationNumber("1")

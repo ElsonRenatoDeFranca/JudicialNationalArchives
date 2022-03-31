@@ -74,7 +74,7 @@ class JudicialNationalArchiveSystemControllerTest {
     }
 
     @Test
-    public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled(){
+    public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled() {
         Person expectedPerson = createPersonMock();
 
         when(judicialNationalArchivesSystemService.save(any())).thenReturn(expectedPerson);

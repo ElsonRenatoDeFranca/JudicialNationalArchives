@@ -3,13 +3,12 @@ package com.addi.challenge.externalsystem.judicialnationalarchivessystem.service
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Person;
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.exception.PersonNotFoundException;
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.repository.JudicialNationalArchivesSystemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class JudicialNationalArchivesSystemServiceImpl implements JudicialNationalArchivesSystemService{
+public class JudicialNationalArchivesSystemServiceImpl implements JudicialNationalArchivesSystemService {
 
     private final JudicialNationalArchivesSystemRepository repository;
 
@@ -21,12 +20,12 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
 
     @Override
     public List<Person> findAll() {
-        List<Person> people  = repository.findAll();
+        List<Person> people = repository.findAll();
         return people;
     }
 
     @Override
-    public Person findById(Long personId){
+    public Person findById(Long personId) {
         try {
             return repository.findById(personId).orElseThrow(() -> new PersonNotFoundException(PERSON_NOT_FOUND_EXCEPTION));
         } catch (PersonNotFoundException e) {
