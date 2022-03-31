@@ -24,15 +24,17 @@ public class JudicialNationalArchiveSystemController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Person addPerson(@RequestBody Person person){
-        return judicialNationalArchivesSystemService.addPerson(person);
+    public ResponseEntity<Person> addPerson(@RequestBody Person person){
+        Person savedPerson  = judicialNationalArchivesSystemService.addPerson(person);
+
+        return new ResponseEntity<>(savedPerson, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Person findPersonById(@PathVariable("id") Long id) {
-        return judicialNationalArchivesSystemService.findPersonById(id);
+    public ResponseEntity<Person> findPersonById(@PathVariable("id") Long id) {
+        Person person = judicialNationalArchivesSystemService.findPersonById(id);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
