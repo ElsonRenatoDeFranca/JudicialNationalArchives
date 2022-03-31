@@ -53,9 +53,9 @@ class JudicialNationalArchiveSystemControllerTest {
     public void shouldReturnNotNullWhenFindByIdIsCalled() {
         Person expectedPerson = createPersonMock();
 
-        when(judicialNationalArchivesSystemService.findPersonById(anyLong())).thenReturn(expectedPerson);
+        when(judicialNationalArchivesSystemService.findById(anyLong())).thenReturn(expectedPerson);
 
-        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.findPersonById(expectedPerson.getId());
+        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.findById(expectedPerson.getId());
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -68,7 +68,7 @@ class JudicialNationalArchiveSystemControllerTest {
 
         doNothing().when(judicialNationalArchivesSystemService).deleteById(any());
 
-        this.judicialNationalArchiveSystemController.deletePersonById(expectedPerson.getId());
+        this.judicialNationalArchiveSystemController.deleteById(expectedPerson.getId());
 
         verify(judicialNationalArchivesSystemService, atLeast(1)).deleteById(any());
     }
@@ -77,13 +77,13 @@ class JudicialNationalArchiveSystemControllerTest {
     public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled(){
         Person expectedPerson = createPersonMock();
 
-        when(judicialNationalArchivesSystemService.addPerson(any())).thenReturn(expectedPerson);
+        when(judicialNationalArchivesSystemService.save(any())).thenReturn(expectedPerson);
 
-        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.addPerson(expectedPerson);
+        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.save(expectedPerson);
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        verify(judicialNationalArchivesSystemService, atLeast(1)).addPerson(any());
+        verify(judicialNationalArchivesSystemService, atLeast(1)).save(any());
     }
 
 

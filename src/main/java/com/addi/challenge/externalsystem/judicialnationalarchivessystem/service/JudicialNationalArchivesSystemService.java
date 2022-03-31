@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface JudicialNationalArchivesSystemService {
     List<Person> findAll();
-    Person findPersonById(Long PersonId);
-    Person addPerson(Person person);
+    Person findById(Long PersonId);
+    Person save(Person person);
     void deleteById(Long personId);
 }

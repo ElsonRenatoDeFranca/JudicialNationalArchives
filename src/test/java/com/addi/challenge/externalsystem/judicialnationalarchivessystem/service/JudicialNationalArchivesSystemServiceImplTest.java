@@ -53,7 +53,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
 
         when(repository.findById(anyLong())).thenReturn(Optional.of(expectedPerson));
 
-        Person actualPerson = this.judicialNationalArchivesSystemService.findPersonById(expectedPerson.getId());
+        Person actualPerson = this.judicialNationalArchivesSystemService.findById(expectedPerson.getId());
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson).isEqualTo(expectedPerson);
@@ -77,7 +77,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
 
         when(repository.save(any())).thenReturn(expectedPerson);
 
-        Person actualPerson = this.judicialNationalArchivesSystemService.addPerson(expectedPerson);
+        Person actualPerson = this.judicialNationalArchivesSystemService.save(expectedPerson);
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson).isEqualTo(expectedPerson);
@@ -91,7 +91,7 @@ class JudicialNationalArchivesSystemServiceImplTest {
         when(repository.findById(anyLong())).thenThrow(new RuntimeException(PERSON_NOT_FOUND_EXCEPTION));
 
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> this.judicialNationalArchivesSystemService.findPersonById(expectedPerson.getId()));
+                () -> this.judicialNationalArchivesSystemService.findById(expectedPerson.getId()));
 
         assertThat(PERSON_NOT_FOUND_EXCEPTION).isEqualTo(exception.getMessage());
     }

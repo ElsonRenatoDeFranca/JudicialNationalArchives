@@ -26,7 +26,7 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
     }
 
     @Override
-    public Person findPersonById(Long personId){
+    public Person findById(Long personId){
         try {
             return repository.findById(personId).orElseThrow(() -> new PersonNotFoundException(PERSON_NOT_FOUND_EXCEPTION));
         } catch (PersonNotFoundException e) {
@@ -36,7 +36,7 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
     }
 
     @Override
-    public Person addPerson(Person person) {
+    public Person save(Person person) {
         return repository.save(person);
     }
 
