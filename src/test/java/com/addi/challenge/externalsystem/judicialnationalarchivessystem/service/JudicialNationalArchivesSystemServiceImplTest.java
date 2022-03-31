@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -47,10 +48,20 @@ class JudicialNationalArchivesSystemServiceImplTest {
         assertThat(people.isEmpty()).isFalse();
     }
 
+    @Test
+    public void shouldReturnNotNullWhenFindByIdIsCalled(){
+        Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(createPersonMock()));
+        Person actual = this.judicialNationalArchivesSystemService.findPersonById(1L);
+
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(createPersonMock());
+    }
+
     private List<Person> createPeopleMockList(){
-        return Arrays.asList(
-                Person.builder().id(1L).firstName("John").lastName("Mccain").nationalIdentificationNumber("1").build(),
-                Person.builder().id(2L).firstName("Barack").lastName("Obama").nationalIdentificationNumber("2").build()
-        );
+        return Arrays.asList(createPersonMock(),createPersonMock());
+    }
+
+    private Person createPersonMock(){
+        return Person.builder().nationalIdentificationNumber("1").firstName("John").lastName("McCain").birthDate("22/01/1978").build();
     }
 }
