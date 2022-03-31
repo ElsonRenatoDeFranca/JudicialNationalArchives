@@ -1,6 +1,5 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.controller;
 
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.domain.Customer;
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Person;
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.service.JudicialNationalArchivesSystemService;
 import org.springframework.http.HttpStatus;

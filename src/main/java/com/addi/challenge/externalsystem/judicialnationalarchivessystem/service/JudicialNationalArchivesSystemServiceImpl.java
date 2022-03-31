@@ -18,21 +18,15 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
 
     @Override
     public List<Person> findAll() {
-        /*List<Customer> customers  = new ArrayList<>();
-        customers.add(Customer.builder().nationalIdentificationNumber("0001").age(21).firstName("John").build());
-        customers.add(Customer.builder().nationalIdentificationNumber("0002").age(25).firstName("Mary").build());
-        customers.add(Customer.builder().nationalIdentificationNumber("0003").age(12).firstName("Antoine").build());
-        return customers;*/
         return repository.findAll();
     }
 
     @Override
     public Person findPersonById(Long personId){
-       //return Customer.builder().nationalIdentificationNumber("0001").age(11).firstName("George Washington").build() ;
         try {
             return repository.findById(personId).orElseThrow(() -> new PersonNotFoundException(PERSON_NOT_FOUND_EXCEPTION));
         } catch (PersonNotFoundException e) {
-            e.getLocalizedMessage();
+            e.printStackTrace();
             return null;
         }
     }
