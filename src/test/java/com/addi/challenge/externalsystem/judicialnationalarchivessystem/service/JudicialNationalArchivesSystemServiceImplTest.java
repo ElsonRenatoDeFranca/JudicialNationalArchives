@@ -61,6 +61,18 @@ class JudicialNationalArchivesSystemServiceImplTest {
     }
 
     @Test
+    public void shouldDeleteAnExistingPersonFromTheDatabaseWhenDeletePersonIsCalled(){
+        Person expectedPerson = createPersonMock();
+
+        doNothing().when(repository).deleteById(any());
+
+        this.judicialNationalArchivesSystemService.deleteById(expectedPerson.getId());
+
+        verify(repository, atLeast(1)).deleteById(any());
+    }
+
+
+    @Test
     public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled(){
         Person expectedPerson = createPersonMock();
 
