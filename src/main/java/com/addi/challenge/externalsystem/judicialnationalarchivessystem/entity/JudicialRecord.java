@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public class Offense {
+public class JudicialRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
