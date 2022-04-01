@@ -1,15 +1,15 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.service;
 
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Person;
+import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Offense;
 
 import java.util.List;
 
 public interface JudicialNationalArchivesSystemService {
-    List<Person> findAll();
+    List<Offense> findAll();
 
-    Person findById(Long PersonId);
+    Offense findById(Long offenseId);
 
-    Person save(Person person);
+    Offense save(Offense offense);
 
-    void deleteById(Long personId);
+    void deleteById(Long offenseId);
 }

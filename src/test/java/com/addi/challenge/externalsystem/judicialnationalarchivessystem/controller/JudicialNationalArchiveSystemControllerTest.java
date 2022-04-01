@@ -1,6 +1,6 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.controller;
 
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Person;
+import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.Offense;
 import com.addi.challenge.externalsystem.judicialnationalarchivessystem.service.JudicialNationalArchivesSystemService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,9 +31,9 @@ class JudicialNationalArchiveSystemControllerTest {
 
     @Test
     public void shouldReturnANotEmptyListWhenFindAllIsCalledAndThereIsAtLeastOneItemInTheDatabase() {
-        when(judicialNationalArchivesSystemService.findAll()).thenReturn(createNotEmptyPeopleMockList());
+        when(judicialNationalArchivesSystemService.findAll()).thenReturn(createNotEmptyOffenseMockList());
 
-        ResponseEntity<List<Person>> actualPeople = this.judicialNationalArchiveSystemController.findAll();
+        ResponseEntity<List<Offense>> actualPeople = this.judicialNationalArchiveSystemController.findAll();
 
         assertThat(actualPeople).isNotNull();
         assertThat(actualPeople.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -41,9 +41,9 @@ class JudicialNationalArchiveSystemControllerTest {
 
     @Test
     public void shouldReturnAnEmptyListWhenFindAllIsCalledAndThereIsNoItemInDatabase() {
-        when(judicialNationalArchivesSystemService.findAll()).thenReturn(createEmptyPeopleMockList());
+        when(judicialNationalArchivesSystemService.findAll()).thenReturn(createEmptyOffenseMockList());
 
-        ResponseEntity<List<Person>> actualPeople = this.judicialNationalArchiveSystemController.findAll();
+        ResponseEntity<List<Offense>> actualPeople = this.judicialNationalArchiveSystemController.findAll();
 
         assertThat(actualPeople).isNotNull();
         assertThat(actualPeople.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -51,11 +51,11 @@ class JudicialNationalArchiveSystemControllerTest {
 
     @Test
     public void shouldReturnNotNullWhenFindByIdIsCalled() {
-        Person expectedPerson = createPersonMock();
+        Offense expectedPerson = createOffenseMock();
 
         when(judicialNationalArchivesSystemService.findById(anyLong())).thenReturn(expectedPerson);
 
-        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.findById(expectedPerson.getId());
+        ResponseEntity<Offense> actualPerson = this.judicialNationalArchiveSystemController.findById(expectedPerson.getId());
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -64,7 +64,7 @@ class JudicialNationalArchiveSystemControllerTest {
 
     @Test
     public void shouldDeleteAnExistingPersonFromTheDatabaseWhenDeletePersonIsCalled() {
-        Person expectedPerson = createPersonMock();
+        Offense expectedPerson = createOffenseMock();
 
         doNothing().when(judicialNationalArchivesSystemService).deleteById(any());
 
@@ -75,11 +75,11 @@ class JudicialNationalArchiveSystemControllerTest {
 
     @Test
     public void shouldAddANewPersonToTheDatabaseWhenAddPersonIsCalled() {
-        Person expectedPerson = createPersonMock();
+        Offense expectedPerson = createOffenseMock();
 
         when(judicialNationalArchivesSystemService.save(any())).thenReturn(expectedPerson);
 
-        ResponseEntity<Person> actualPerson = this.judicialNationalArchiveSystemController.save(expectedPerson);
+        ResponseEntity<Offense> actualPerson = this.judicialNationalArchiveSystemController.save(expectedPerson);
 
         assertThat(actualPerson).isNotNull();
         assertThat(actualPerson.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -87,21 +87,21 @@ class JudicialNationalArchiveSystemControllerTest {
     }
 
 
-    private List<Person> createNotEmptyPeopleMockList() {
-        return Arrays.asList(createPersonMock(), createPersonMock());
+    private List<Offense> createNotEmptyOffenseMockList() {
+        return Arrays.asList(createOffenseMock(), createOffenseMock());
     }
 
-    private List<Person> createEmptyPeopleMockList() {
+    private List<Offense> createEmptyOffenseMockList() {
         return Collections.emptyList();
     }
 
-    private Person createPersonMock() {
-        return Person.builder()
+    private Offense createOffenseMock() {
+        return Offense.builder()
                 .id(1L)
-                .nationalIdentificationNumber("1")
-                .firstName("Lebron")
-                .lastName("James")
-                .birthDate("22/01/1978")
+                .description("Home invasion")
+                .maximumFine("100")
+                .probationTerm("10")
+                .maximumPrisonTerm("10")
                 .build();
     }
 }

@@ -13,14 +13,12 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public class Person {
+public class Offense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String nationalIdentificationNumber;
-    private String birthDate;
-    private String email;
-
+    private String description;
+    private String maximumPrisonTerm;
+    private String maximumFine;
+    private String probationTerm;;
 }

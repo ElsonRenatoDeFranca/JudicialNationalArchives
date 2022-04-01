@@ -1,7 +1,7 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.exception;
 
-public class PersonNotFoundException extends Exception {
-    public PersonNotFoundException(String message) {
+public class OffenseNotFoundException extends Exception {
+    public OffenseNotFoundException(String message) {
         super(message);
     }
 }
