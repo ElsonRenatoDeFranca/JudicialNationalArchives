@@ -1,21 +1,19 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-@Getter
-@EqualsAndHashCode(exclude = {"name"})
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Data
 @Builder
 public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;

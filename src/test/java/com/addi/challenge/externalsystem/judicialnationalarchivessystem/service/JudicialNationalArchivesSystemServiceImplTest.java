@@ -1,28 +1,18 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.service;
 
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.JudicialRecord;
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.repository.JudicialNationalArchivesSystemRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class JudicialNationalArchivesSystemServiceImplTest {
 
-    @Mock
-    private JudicialNationalArchivesSystemRepository repository;
+    //@Mock
+    //private JudicialNationalArchivesSystemRepository repository;
 
     @InjectMocks
     private JudicialNationalArchivesSystemServiceImpl judicialNationalArchivesSystemService;
