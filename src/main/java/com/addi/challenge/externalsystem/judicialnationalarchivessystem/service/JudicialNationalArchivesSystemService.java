@@ -9,5 +9,7 @@ public interface JudicialNationalArchivesSystemService {
     Person findPersonById(Long personById);
     Person savePerson(Person person);
     CriminalOffence saveCriminalOffence(CriminalOffence criminalOffence);
-    Person findJudicialRecordsByPersonId(Long personId);
+    Person findJudicialRecordsByPersonId(String nationalIdentificationNumber);
+    Person findByNationalIdentificationNumber(String nationalIdentificationNumber);
+
 }

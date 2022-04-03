@@ -5,4 +5,5 @@ import com.addi.challenge.externalsystem.judicialnationalarchivessystem.entity.P
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PeopleManagerRepository extends JpaRepository<Person, Long> {
+    Person findByNationalIdentificationNumber(String nationalIdentificationNumber);
 }

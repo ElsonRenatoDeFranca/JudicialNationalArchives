@@ -20,7 +20,7 @@ public class JudicialNationalArchiveSystemController {
 
     @GetMapping("/person/{personId}")
     @ResponseBody
-    public ResponseEntity<Person> findJudicialRecordsByPersonId(@PathVariable("personId") Long personId) {
+    public ResponseEntity<Person> findJudicialRecordsByPersonId(@PathVariable("personId") String personId) {
         //Person person = judicialNationalArchivesSystemService.findPersonById(personId);
         //CriminalOffence criminalOffence  = judicialNationalArchivesSystemService.findCriminalOffenceById(crimeId);
         Person person = this.judicialNationalArchivesSystemService.findJudicialRecordsByPersonId(personId);

@@ -58,6 +58,7 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
 
     @Override
     public Person savePerson(Person person) {
+        Person personFromRemoteService = findJudicialRecordsByPersonId(person.getNationalIdentificationNumber());
         return this.peopleManagerRepository.saveAndFlush(person);
     }
 
@@ -67,10 +68,19 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
     }
 
     @Override
-    public Person findJudicialRecordsByPersonId(Long personId) {
-        Person person = this.peopleManagerRepository.findById(personId).orElse(null);
+    public Person findJudicialRecordsByPersonId(String nationalIdentificationNumber) {
+        Person person = this.findByNationalIdentificationNumber(nationalIdentificationNumber);
 
         return person;
+    }
+
+    @Override
+    public Person findByNationalIdentificationNumber(String nationalIdentificationNumber) {
+        ResponseEntity<Person> responseEntity =
+                restTemplate.exchange(remotePeopleServiceUrl + nationalIdentificationNumber,
+                        HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), Person.class);
+        return responseEntity.getBody();
+
     }
 
 
