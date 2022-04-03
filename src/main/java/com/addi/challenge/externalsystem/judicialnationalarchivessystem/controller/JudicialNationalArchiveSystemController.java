@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/criminalrecords")
+@RequestMapping("/api/judicialrecords")
 public class JudicialNationalArchiveSystemController {
 
     private final JudicialNationalArchivesSystemService judicialNationalArchivesSystemService;
@@ -18,20 +18,33 @@ public class JudicialNationalArchiveSystemController {
         this.judicialNationalArchivesSystemService = judicialNationalArchivesSystemService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/person/{personId}")
     @ResponseBody
-    public ResponseEntity<ResponseTemplateWrapper> findPersonById(@PathVariable("id") Long id) {
-        Person person = judicialNationalArchivesSystemService.findPersonById(id);
-        CriminalOffence criminalOffence  = judicialNationalArchivesSystemService.findCriminalOffenceById(id);
-
-        ResponseTemplateWrapper judicialRecord =
+    public ResponseEntity<Person> findJudicialRecordsByPersonId(@PathVariable("personId") Long personId) {
+        //Person person = judicialNationalArchivesSystemService.findPersonById(personId);
+        //CriminalOffence criminalOffence  = judicialNationalArchivesSystemService.findCriminalOffenceById(crimeId);
+        Person person = this.judicialNationalArchivesSystemService.findJudicialRecordsByPersonId(personId);
+        /*ResponseTemplateWrapper judicialRecord =
                 ResponseTemplateWrapper
                         .builder()
                         .person(person)
                         .criminalOffence(criminalOffence)
-                        .build();
+                        .build();*/
 
-        return new ResponseEntity<>(judicialRecord, HttpStatus.OK);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
+
+    @PostMapping("/people")
+    public ResponseEntity<Person> savePerson(@RequestBody Person person) {
+        Person savedPerson = judicialNationalArchivesSystemService.savePerson(person);
+        return new ResponseEntity<>(savedPerson, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/crimes")
+    public ResponseEntity<CriminalOffence> saveCriminalOffence(@RequestBody CriminalOffence criminalOffence) {
+        CriminalOffence savedCriminalOffence = judicialNationalArchivesSystemService.saveCriminalOffence(criminalOffence);
+        return new ResponseEntity<>(savedCriminalOffence, HttpStatus.CREATED);
+    }
+
 
 }
