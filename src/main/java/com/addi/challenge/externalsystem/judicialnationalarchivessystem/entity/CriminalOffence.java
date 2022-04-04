@@ -19,6 +19,7 @@ public class CriminalOffence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String criminalOffenceId;
     private String description;
     private String maximumPrisonTerm;
     private String maximumFine;

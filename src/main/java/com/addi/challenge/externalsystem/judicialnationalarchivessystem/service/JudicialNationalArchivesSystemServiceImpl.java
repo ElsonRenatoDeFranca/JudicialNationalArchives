@@ -38,7 +38,7 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
         this.peopleManagerRepository = peopleManagerRepository;
     }
 
-
+    /*
     @Override
     public CriminalOffence findCriminalOffenceById(Long criminalOffenceId) {
         ResponseEntity<CriminalOffence> responseEntity =
@@ -54,11 +54,13 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
                 restTemplate.exchange(remotePeopleServiceUrl + personById,
                         HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), Person.class);
         return responseEntity.getBody();
-    }
+    }*/
 
     @Override
     public Person savePerson(Person person) {
-        Person personFromRemoteService = findJudicialRecordsByPersonId(person.getNationalIdentificationNumber());
+        Person personFromRemoteService = this.findPersonByNationalIdentificationNumber(person.getNationalIdentificationNumber());
+        //CriminalOffence criminalOffence = this.findCriminalOffenceById(person.getCrimes().get(0).getCriminalOffenceId());
+
         return this.peopleManagerRepository.saveAndFlush(person);
     }
 
@@ -67,15 +69,7 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
         return this.criminalOffencesManagerRepository.saveAndFlush(criminalOffence);
     }
 
-    @Override
-    public Person findJudicialRecordsByPersonId(String nationalIdentificationNumber) {
-        Person person = this.findByNationalIdentificationNumber(nationalIdentificationNumber);
-
-        return person;
-    }
-
-    @Override
-    public Person findByNationalIdentificationNumber(String nationalIdentificationNumber) {
+    private Person findPersonByNationalIdentificationNumber(String nationalIdentificationNumber) {
         ResponseEntity<Person> responseEntity =
                 restTemplate.exchange(remotePeopleServiceUrl + nationalIdentificationNumber,
                         HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), Person.class);
@@ -83,5 +77,12 @@ public class JudicialNationalArchivesSystemServiceImpl implements JudicialNation
 
     }
 
+    private CriminalOffence findCriminalOffenceById(Long criminalOffenceId) {
+        ResponseEntity<CriminalOffence> responseEntity =
+                restTemplate.exchange(remoteCriminalOffencesServiceUrl + criminalOffenceId,
+                        HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), CriminalOffence.class);
+
+        return responseEntity.getBody();
+    }
 
 }

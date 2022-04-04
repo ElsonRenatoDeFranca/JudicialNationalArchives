@@ -23,7 +23,7 @@ public class JudicialNationalArchiveSystemController {
     public ResponseEntity<Person> findJudicialRecordsByPersonId(@PathVariable("personId") String personId) {
         //Person person = judicialNationalArchivesSystemService.findPersonById(personId);
         //CriminalOffence criminalOffence  = judicialNationalArchivesSystemService.findCriminalOffenceById(crimeId);
-        Person person = this.judicialNationalArchivesSystemService.findJudicialRecordsByPersonId(personId);
+        //Person person = this.judicialNationalArchivesSystemService.findJudicialRecordsByPersonId(personId);
         /*ResponseTemplateWrapper judicialRecord =
                 ResponseTemplateWrapper
                         .builder()
@@ -31,7 +31,8 @@ public class JudicialNationalArchiveSystemController {
                         .criminalOffence(criminalOffence)
                         .build();*/
 
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        //return new ResponseEntity<>(person, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping("/people")
