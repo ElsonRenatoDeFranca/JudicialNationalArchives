@@ -1,6 +1,6 @@
 package com.addi.challenge.externalsystem.judicialnationalarchivessystem.controller;
 
-import com.addi.challenge.externalsystem.judicialnationalarchivessystem.service.JudicialNationalArchivesSystemService;
+import com.addi.challenge.externalsystem.judicialnationalarchivessystem.service.ScoreCalculatorService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -14,10 +14,10 @@ import static org.mockito.ArgumentMatchers.any;
 class JudicialNationalArchiveSystemControllerTest {
 
     @Mock
-    private JudicialNationalArchivesSystemService judicialNationalArchivesSystemService;
+    private ScoreCalculatorService judicialNationalArchivesSystemService;
 
     @InjectMocks
-    private JudicialNationalArchiveSystemController judicialNationalArchiveSystemController;
+    private ScoreCalculatorController judicialNationalArchiveSystemController;
 
     /*
     @Test
